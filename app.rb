@@ -1,6 +1,7 @@
 require "json"
 require "rubygems"
 require "sinatra"
+require_relative "calls"
 
 
 use Rack::Auth::Basic, "Restricted Area" do |username, password|
@@ -9,5 +10,5 @@ end
 
 get "/" do
     content_type :json
-    {:key => "value1", :key2 => "value2"}.to_json
+    phone_codes
 end
