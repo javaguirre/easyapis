@@ -1,4 +1,3 @@
-require "json"
 require "sinatra"
 require "sinatra/json"
 require "sinatra/config_file"
