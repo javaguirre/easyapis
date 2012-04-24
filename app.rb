@@ -1,14 +1,19 @@
 require "json"
-require "rubygems"
 require "sinatra"
+require "sinatra/json"
+require "sinatra/config_file"
 require_relative "calls"
 
+config_file = 'config.yml'
 
 use Rack::Auth::Basic, "Restricted Area" do |username, password|
     [username, password] == ['javaguirre', 'javaguirre']
 end
 
 get "/" do
-    content_type :json
-    phone_codes
+    settings.title
+end
+
+get %r{/([\w]+)} do
+    json send params[:captures].first.to_sym
 end

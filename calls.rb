@@ -1,6 +1,5 @@
 require "httparty"
 require "nokogiri"
-require "json"
 
 def phone_codes
     response = HTTParty.get("http://countrycode.org/")
@@ -21,5 +20,5 @@ def phone_codes
     #    phone_codes = phone_codes.to_json
     #    f1.puts "var phone_codes = #{phone_codes}"
     #end
-    phone_codes.to_json
+    phone_codes
 end
