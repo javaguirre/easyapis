@@ -5,22 +5,31 @@ require "sinatra/config_file"
 require "sinatra/memcache"
 require "./calls"
 
-config_file = 'config.yml'
 
 class EasyApis < Sinatra::Base
+    register Sinatra::ConfigFile
+    register Sinatra::MemCache
     helpers Sinatra::JSON
-    helpers Sinatra::MemCache
+    #helpers Sinatra::MemCache::Helpers
+
+    config_file 'config.yml'
 
     use Rack::Auth::Basic, "Restricted Area" do |username, password|
-        [username, password] == ['javaguirre', 'javaguirre']
+        [username, password] == [settings.username, settings.password]
     end
 
     get "/" do
         settings.title
     end
 
+    #TODO experiment, we need security
     get %r{/([\w]+)} do
-        json Calls.send params[:captures].first.to_sym
+        call_action = params[:captures].first.to_sym
+        hash = cache "API" do
+            {call_action => json(Calls.send(call_action))}
+        end
+        content_type :json
+        hash[call_action]
     end
 end
 

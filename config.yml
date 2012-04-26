@@ -1,1 +1,11 @@
 title: Easy APIs
+username: javaguirre
+password: javaguirre
+
+#CACHE
+cache_server: "localhost:11211"
+cache_namespace: "sinatra-memcache"
+cache_enable: true
+cache_logging: true
+cache_default_expiry: 3600
+cache_default_compress: false
