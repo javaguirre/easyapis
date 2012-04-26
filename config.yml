@@ -1,6 +1,7 @@
 title: Easy APIs
 username: javaguirre
 password: javaguirre
+public_folder: ./static
 
 #CACHE
 cache_server: "localhost:11211"
